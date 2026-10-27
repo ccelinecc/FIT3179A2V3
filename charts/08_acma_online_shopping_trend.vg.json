@@ -8,7 +8,7 @@
   "width": 900,
   "height": 280,
   "data": {
-    "url": "../data/acma_online_shopping_trend.csv",
+    "url": "data/acma_online_shopping_trend.csv",
     "format": {
       "type": "csv"
     }
