@@ -1,0 +1,88 @@
+{
+  "title": {
+    "text": "Seasonality in online retail",
+    "subtitle": "Monthly turnover by year (requires longer ABS series)"
+  },
+  "width": "800",
+  "height": 230,
+  "data": {
+    "url": "../data/abs_online_total.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "date": "date"
+      }
+    }
+  },
+  "transform": [
+    {
+      "calculate": "month(datum.date)",
+      "as": "month_num"
+    },
+    {
+      "calculate": "year(datum.date)",
+      "as": "year"
+    }
+  ],
+  "mark": "rect",
+  "encoding": {
+    "x": {
+      "field": "month_num",
+      "type": "ordinal",
+      "title": "Month",
+      "axis": {
+        "labelExpr": "['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][datum.value-1]"
+      }
+    },
+    "y": {
+      "field": "year",
+      "type": "ordinal",
+      "title": "Year"
+    },
+    "color": {
+      "field": "seasonally_adjusted_millions",
+      "type": "quantitative",
+      "title": "Turnover ($m)",
+      "scale": {
+        "scheme": "oranges"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "year",
+        "type": "ordinal"
+      },
+      {
+        "field": "month_num",
+        "type": "ordinal",
+        "title": "Month number"
+      },
+      {
+        "field": "seasonally_adjusted_millions",
+        "type": "quantitative",
+        "title": "Turnover ($m)",
+        "format": ",.1f"
+      }
+    ]
+  },
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#475569",
+      "titleColor": "#172B4D",
+      "gridColor": "#E5E7EB",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "title": {
+      "anchor": "start",
+      "color": "#172B4D",
+      "fontSize": 18,
+      "subtitleColor": "#64748B",
+      "subtitleFontSize": 12
+    }
+  }
+}

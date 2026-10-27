@@ -1,0 +1,104 @@
+{
+  "title": {
+    "text": "Different trajectories for food and non-food sales"
+  },
+  "data": {
+    "url": "../data/abs_food_nonfood.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "date": "date"
+      }
+    }
+  },
+  "transform": [
+    {
+      "fold": [
+        "food_millions",
+        "non_food_millions"
+      ],
+      "as": [
+        "category_field",
+        "turnover"
+      ]
+    },
+    {
+      "calculate": "datum.category_field === 'food_millions' ? 'Food' : 'Non-food'",
+      "as": "category"
+    }
+  ],
+  "facet": {
+    "row": {
+      "field": "category",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Food",
+        "Non-food"
+      ]
+    }
+  },
+  "spec": {
+    "width": "600",
+    "height": 130,
+    "mark": {
+      "type": "line",
+      "point": true,
+      "strokeWidth": 2,
+      "color": "#457B9D"
+    },
+    "encoding": {
+      "x": {
+        "field": "date",
+        "type": "temporal",
+        "title": "Month",
+        "axis": {
+          "format": "%b %y",
+          "labelAngle": -35
+        }
+      },
+      "y": {
+        "field": "turnover",
+        "type": "quantitative",
+        "title": "Turnover ($m)",
+        "scale": {
+          "zero": false
+        }
+      },
+      "tooltip": [
+        {
+          "field": "date",
+          "type": "temporal"
+        },
+        {
+          "field": "category"
+        },
+        {
+          "field": "turnover",
+          "type": "quantitative",
+          "format": ",.1f"
+        }
+      ]
+    }
+  },
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#475569",
+      "titleColor": "#172B4D",
+      "gridColor": "#E5E7EB",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "title": {
+      "anchor": "start",
+      "color": "#172B4D",
+      "fontSize": 18,
+      "subtitleColor": "#64748B",
+      "subtitleFontSize": 12
+    }
+  }
+}

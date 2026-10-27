@@ -1,0 +1,77 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Australian States & Capital Cities Demographics",
+  "width": 900,
+  "height": 420,
+  "projection": {
+    "type": "mercator",
+    "center": [134, -27],
+    "scale": 650
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "../data/australian_map.geojson"
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f8f9fa",
+        "stroke": "#cccccc",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "properties.shapeName",
+            "type": "nominal",
+            "title": "State / Territory"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"Capital city": "Sydney", "Median age (years)": 37.1, "Sex ratio": 98.8, "longitude": 151.2093, "latitude": -33.8688},
+          {"Capital city": "Melbourne", "Median age (years)": 36.8, "Sex ratio": 97.8, "longitude": 144.9631, "latitude": -37.8136},
+          {"Capital city": "Brisbane", "Median age (years)": 36.5, "Sex ratio": 98.2, "longitude": 153.0251, "latitude": -27.4698},
+          {"Capital city": "Adelaide", "Median age (years)": 39.3, "Sex ratio": 95.9, "longitude": 138.6007, "latitude": -34.9285},
+          {"Capital city": "Perth", "Median age (years)": 37.6, "Sex ratio": 99.0, "longitude": 115.8605, "latitude": -31.9505},
+          {"Capital city": "Hobart", "Median age (years)": 38.6, "Sex ratio": 95.8, "longitude": 147.3272, "latitude": -42.8821},
+          {"Capital city": "Darwin", "Median age (years)": 34.5, "Sex ratio": 106.8, "longitude": 130.8456, "latitude": -12.4634},
+          {"Capital city": "Canberra", "Median age (years)": 35.4, "Sex ratio": 97.5, "longitude": 149.13, "latitude": -35.2809}
+        ]
+      },
+      "mark": {
+        "type": "circle",
+        "size": 160,
+        "stroke": "#444444",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "Median age (years)",
+          "type": "quantitative",
+          "scale": {"scheme": "oranges"},
+          "title": "Median Age (Years)"
+        },
+        "tooltip": [
+          {"field": "Capital city", "type": "nominal", "title": "Capital City"},
+          {"field": "Median age (years)", "type": "quantitative", "title": "Median Age"}        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

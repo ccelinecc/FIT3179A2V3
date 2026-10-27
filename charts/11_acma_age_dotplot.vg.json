@@ -1,0 +1,74 @@
+{
+  "title": {
+    "text": "Online shopping participation by age",
+    "subtitle": "ACMA 2025; reported buying goods or services online in past six months"
+  },
+  "width": "900",
+  "height": 300,
+  "data": {
+    "url": "../data/acma_online_shopping_by_age_2025.csv"
+  },
+  "mark": {
+    "type": "point",
+    "filled": true,
+    "size": 130,
+    "color": "#E87532"
+  },
+  "encoding": {
+    "y": {
+      "field": "group",
+      "type": "ordinal",
+      "sort": [
+        "18–24",
+        "25–34",
+        "35–44",
+        "45–54",
+        "55–64",
+        "65–74",
+        "75+"
+      ],
+      "title": "Age group"
+    },
+    "x": {
+      "field": "percent",
+      "type": "quantitative",
+      "title": "Respondents (%)",
+      "scale": {
+        "domain": [
+          0,
+          100
+        ]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "group"
+      },
+      {
+        "field": "percent",
+        "type": "quantitative",
+        "format": ".1f"
+      }
+    ]
+  },
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#475569",
+      "titleColor": "#172B4D",
+      "gridColor": "#E5E7EB",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "title": {
+      "anchor": "start",
+      "color": "#172B4D",
+      "fontSize": 18,
+      "subtitleColor": "#64748B",
+      "subtitleFontSize": 12
+    }
+  }
+}

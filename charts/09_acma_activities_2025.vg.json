@@ -1,0 +1,81 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "What else do Australians do online?",
+    "subtitle": "ACMA reported internet-based activities, 2025"
+  },
+  "width": 680,
+  "height": 300,
+  "data": {
+    "url": "../data/acma_internet_activities_2025.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.percent > 0"
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 3,
+    "color": "#457B9D"
+  },
+  "encoding": {
+    "y": {
+      "field": "activity",
+      "type": "nominal",
+      "sort": "-x",
+      "title": null,
+      "axis": {
+        "labelLimit": 300,
+        "labelFontSize": 10
+      }
+    },
+    "x": {
+      "field": "percent",
+      "type": "quantitative",
+      "title": "Respondents (%)",
+      "scale": {
+        "domain": [0, 100]
+      },
+      "axis": {
+        "format": ".0f"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "activity",
+        "type": "nominal",
+        "title": "Activity"
+      },
+      {
+        "field": "percent",
+        "type": "quantitative",
+        "title": "Respondents (%)",
+        "format": ".1f"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#475569",
+      "titleColor": "#172B4D",
+      "gridColor": "#E5E7EB",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "title": {
+      "anchor": "start",
+      "color": "#172B4D",
+      "fontSize": 18,
+      "subtitleColor": "#64748B",
+      "subtitleFontSize": 12
+    }
+  }
+}

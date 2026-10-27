@@ -1,0 +1,38 @@
+
+{
+  "width": 900,
+  "height": 350,
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "../data/abs_online_total.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "mark": {
+    "type": "line",
+    "point": true
+  },
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": "Month"
+    },
+    "y": {
+      "field": "seasonally_adjusted_millions",
+      "type": "quantitative",
+      "title": "Turnover ($ million)"
+    },
+    "tooltip": [
+      {
+        "field": "date",
+        "type": "temporal"
+      },
+      {
+        "field": "seasonally_adjusted_millions",
+        "type": "quantitative"
+      }
+    ]
+  }
+}

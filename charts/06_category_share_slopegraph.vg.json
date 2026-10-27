@@ -1,0 +1,127 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Food and non-food sales composition",
+    "subtitle": "Share of combined food and non-food turnover, June 2020 vs January 2021"
+  },
+  "width": 800,
+  "height": 260,
+  "data": {
+    "url": "../data/abs_food_nonfood.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "date": "date"
+      }
+    }
+  },
+  "transform": [
+    {
+      "fold": [
+        "food_millions",
+        "non_food_millions"
+      ],
+      "as": [
+        "category_field",
+        "turnover"
+      ]
+    },
+    {
+      "calculate": "datum.category_field === 'food_millions' ? 'Food' : 'Non-food'",
+      "as": "category"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "sum",
+          "field": "turnover",
+          "as": "total_turnover"
+        }
+      ],
+      "groupby": ["date"]
+    },
+    {
+      "calculate": "datum.turnover / datum.total_turnover * 100",
+      "as": "share_percent"
+    },
+    {
+      "filter": "timeFormat(datum.date, '%Y-%m-%d') === '2020-06-01' || timeFormat(datum.date, '%Y-%m-%d') === '2021-01-01'"
+    },
+    {
+      "calculate": "timeFormat(datum.date, '%Y-%m-%d') === '2020-06-01' ? 'Jun 2020' : 'Jan 2021'",
+      "as": "period"
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "point": {
+      "filled": true,
+      "size": 100
+    },
+    "strokeWidth": 2.5
+  },
+  "encoding": {
+    "x": {
+      "field": "period",
+      "type": "ordinal",
+      "title": "Comparison period",
+      "sort": ["Jun 2020", "Jan 2021"]
+    },
+    "y": {
+      "field": "share_percent",
+      "type": "quantitative",
+      "title": "Share of food + non-food sales (%)",
+      "scale": {
+        "zero": false
+      }
+    },
+    "color": {
+      "field": "category",
+      "type": "nominal",
+      "title": "Category",
+      "scale": {
+        "domain": ["Food", "Non-food"],
+        "range": ["#2A9D8F", "#457B9D"]
+      }
+    },
+    "detail": {
+      "field": "category"
+    },
+    "tooltip": [
+      {
+        "field": "period",
+        "title": "Period"
+      },
+      {
+        "field": "category",
+        "title": "Category"
+      },
+      {
+        "field": "share_percent",
+        "type": "quantitative",
+        "title": "Share (%)",
+        "format": ".1f"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#475569",
+      "titleColor": "#172B4D",
+      "gridColor": "#E5E7EB",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "title": {
+      "anchor": "start",
+      "color": "#172B4D",
+      "fontSize": 18,
+      "subtitleColor": "#64748B",
+      "subtitleFontSize": 12
+    }
+  }
+}

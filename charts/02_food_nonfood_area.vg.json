@@ -1,0 +1,83 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Food and Non-food Online Sales",
+    "subtitle": "Seasonally adjusted turnover ($ million)"
+  },
+  "width": 900,
+  "height": 280,
+  "data": {
+    "url": "../data/abs_food_nonfood.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "fold": [
+        "food_millions",
+        "non_food_millions"
+      ],
+      "as": [
+        "category",
+        "turnover"
+      ]
+    },
+    {
+      "calculate": "datum.category === 'food_millions' ? 'Food' : 'Non-food'",
+      "as": "category_label"
+    }
+  ],
+  "mark": {
+    "type": "area",
+    "opacity": 0.75
+  },
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": "Month",
+      "axis": {
+        "format": "%b %Y",
+        "labelAngle": -45
+      }
+    },
+    "y": {
+      "field": "turnover",
+      "type": "quantitative",
+      "title": "Turnover ($ million)",
+      "stack": "zero"
+    },
+    "color": {
+      "field": "category_label",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Food", "Non-food"],
+        "range": ["#2A9D8F", "#457B9D"]
+      },
+      "legend": {
+        "title": "Category"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "date",
+        "type": "temporal",
+        "title": "Month",
+        "format": "%b %Y"
+      },
+      {
+        "field": "category_label",
+        "type": "nominal",
+        "title": "Category"
+      },
+      {
+        "field": "turnover",
+        "type": "quantitative",
+        "title": "Turnover ($ million)",
+        "format": ",.1f"
+      }
+    ]
+  }
+}

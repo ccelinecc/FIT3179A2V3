@@ -1,0 +1,112 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Original versus Seasonally Adjusted Turnover",
+    "subtitle": "ABS total online retail turnover ($ million)"
+  },
+  "width": 800,
+  "height": 280,
+  "data": {
+    "url": "../data/abs_online_total.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "fold": [
+        "original_millions",
+        "seasonally_adjusted_millions"
+      ],
+      "as": [
+        "series",
+        "turnover"
+      ]
+    },
+    {
+      "calculate": "datum.series === 'original_millions' ? 'Original' : 'Seasonally adjusted'",
+      "as": "series_label"
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "point": {
+      "filled": true,
+      "size": 35
+    },
+    "strokeWidth": 2.2
+  },
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": "Month",
+      "axis": {
+        "format": "%b %Y",
+        "labelAngle": -35
+      }
+    },
+    "y": {
+      "field": "turnover",
+      "type": "quantitative",
+      "title": "Turnover ($m)",
+      "scale": {
+        "zero": false
+      }
+    },
+    "color": {
+      "field": "series_label",
+      "type": "nominal",
+      "title": "Series",
+      "scale": {
+        "domain": [
+          "Original",
+          "Seasonally adjusted"
+        ],
+        "range": [
+          "#457B9D",
+          "#E87532"
+        ]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "date",
+        "type": "temporal",
+        "title": "Month",
+        "format": "%b %Y"
+      },
+      {
+        "field": "series_label",
+        "type": "nominal",
+        "title": "Series"
+      },
+      {
+        "field": "turnover",
+        "type": "quantitative",
+        "title": "Turnover ($m)",
+        "format": ",.1f"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#475569",
+      "titleColor": "#172B4D",
+      "gridColor": "#E5E7EB",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "title": {
+      "anchor": "start",
+      "color": "#172B4D",
+      "fontSize": 18,
+      "subtitleColor": "#64748B",
+      "subtitleFontSize": 12
+    }
+  }
+}

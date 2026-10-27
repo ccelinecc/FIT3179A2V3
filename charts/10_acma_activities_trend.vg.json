@@ -1,0 +1,95 @@
+{
+  "title": {
+    "text": "How online activities have changed",
+    "subtitle": "Select a category in the legend to highlight it"
+  },
+  "width": 850,
+  "height": 320,
+  "data": {
+    "url": "../data/acma_internet_activities.csv"
+  },
+  "params": [
+    {
+      "name": "activitySelect",
+      "select": {
+        "type": "point",
+        "fields": [
+          "activity"
+        ],
+        "bind": "legend"
+      }
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "strokeWidth": 2,
+    "point": false
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "title": "Survey year"
+    },
+    "y": {
+      "field": "percent",
+      "type": "quantitative",
+      "title": "Respondents (%)",
+      "scale": {
+        "domain": [
+          0,
+          100
+        ]
+      }
+    },
+    "color": {
+      "field": "activity",
+      "type": "nominal",
+      "legend": {
+        "orient": "bottom",
+        "columns": 2
+      }
+    },
+    "opacity": {
+      "condition": {
+        "param": "activitySelect",
+        "value": 1
+      },
+      "value": 0.15
+    },
+    "tooltip": [
+      {
+        "field": "activity"
+      },
+      {
+        "field": "year",
+        "type": "ordinal"
+      },
+      {
+        "field": "percent",
+        "type": "quantitative",
+        "format": ".1f"
+      }
+    ]
+  },
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#475569",
+      "titleColor": "#172B4D",
+      "gridColor": "#E5E7EB",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "title": {
+      "anchor": "start",
+      "color": "#172B4D",
+      "fontSize": 18,
+      "subtitleColor": "#64748B",
+      "subtitleFontSize": 12
+    }
+  }
+}

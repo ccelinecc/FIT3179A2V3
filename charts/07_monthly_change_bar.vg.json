@@ -1,0 +1,98 @@
+{
+  "width": 900,
+  "height": 350,
+  "title": {
+    "text": "Month-to-month change in online turnover",
+    "subtitle": "Calculated from seasonally adjusted turnover in the supplied sample"
+  },
+  "data": {
+    "url": "../data/abs_online_total.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "date": "date"
+      }
+    }
+  },
+  "transform": [
+    {
+      "window": [
+        {
+          "op": "lag",
+          "field": "seasonally_adjusted_millions",
+          "as": "previous"
+        }
+      ],
+      "sort": [
+        {
+          "field": "date",
+          "order": "ascending"
+        }
+      ]
+    },
+    {
+      "calculate": "datum.seasonally_adjusted_millions - datum.previous",
+      "as": "change_millions"
+    },
+    {
+      "filter": "isValid(datum.change_millions)"
+    }
+  ],
+  "mark": {
+    "type": "bar"
+  },
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": "Month",
+      "axis": {
+        "format": "%b %Y",
+        "labelAngle": -35
+      }
+    },
+    "y": {
+      "field": "change_millions",
+      "type": "quantitative",
+      "title": "Change from previous month ($m)"
+    },
+    "color": {
+      "condition": {
+        "test": "datum.change_millions >= 0",
+        "value": "#2A9D8F"
+      },
+      "value": "#E87532"
+    },
+    "tooltip": [
+      {
+        "field": "date",
+        "type": "temporal"
+      },
+      {
+        "field": "change_millions",
+        "type": "quantitative",
+        "format": ",.1f"
+      }
+    ]
+  },
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#475569",
+      "titleColor": "#172B4D",
+      "gridColor": "#E5E7EB",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "title": {
+      "anchor": "start",
+      "color": "#172B4D",
+      "fontSize": 18,
+      "subtitleColor": "#64748B",
+      "subtitleFontSize": 12
+    }
+  }
+}
