@@ -8,7 +8,7 @@
   "width": 900,
   "height": 280,
   "data": {
-    "url": "../data/abs_food_nonfood.csv",
+    "url": "data/abs_food_nonfood.csv",
     "format": {
       "type": "csv"
     }
