@@ -6,7 +6,7 @@
   "width": "900",
   "height": 150,
   "data": {
-    "url": "../data/acma_online_shopping_by_gender_2025.csv"
+    "url": "data/acma_online_shopping_by_gender_2025.csv"
   },
   "mark": {
     "type": "bar",
