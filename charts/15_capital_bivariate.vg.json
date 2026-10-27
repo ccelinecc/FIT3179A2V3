@@ -14,7 +14,7 @@
   "layer": [
     {
       "data": {
-        "url": "../data/australian_map.geojson"
+        "url": "data/australian_map.geojson"
       },
       "mark": {
         "type": "geoshape",
