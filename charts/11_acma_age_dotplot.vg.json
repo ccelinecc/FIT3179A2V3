@@ -6,7 +6,7 @@
   "width": "900",
   "height": 300,
   "data": {
-    "url": "../data/acma_online_shopping_by_age_2025.csv"
+    "url": "data/acma_online_shopping_by_age_2025.csv"
   },
   "mark": {
     "type": "point",
