@@ -6,7 +6,7 @@
   "width": "800",
   "height": 230,
   "data": {
-    "url": "../data/abs_online_total.csv",
+    "url": "data/abs_online_total.csv",
     "format": {
       "type": "csv",
       "parse": {
