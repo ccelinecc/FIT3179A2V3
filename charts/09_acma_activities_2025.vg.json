@@ -8,7 +8,7 @@
   "width": 680,
   "height": 300,
   "data": {
-    "url": "../data/acma_internet_activities_2025.csv",
+    "url": "data/acma_internet_activities_2025.csv",
     "format": {
       "type": "csv"
     }
