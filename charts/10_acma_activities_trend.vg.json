@@ -6,7 +6,7 @@
   "width": 850,
   "height": 320,
   "data": {
-    "url": "../data/acma_internet_activities.csv"
+    "url": "data/acma_internet_activities.csv"
   },
   "params": [
     {
