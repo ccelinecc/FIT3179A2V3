@@ -6,7 +6,7 @@
     "subtitle": "Calculated from seasonally adjusted turnover in the supplied sample"
   },
   "data": {
-    "url": "../data/abs_online_total.csv",
+    "url": "data/abs_online_total.csv",
     "format": {
       "type": "csv",
       "parse": {
